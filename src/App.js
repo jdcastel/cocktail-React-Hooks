@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import {Provider, useDispatch, useSelector} from 'react-redux'
+import { getCocktailAsync } from "./redux/cocktailThunk";
+import { store } from './redux/store';
+import { useEffect, useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const [filter,setFilter]= useState('')
+
+  const dispatch= useDispatch();
+  const drinks=useSelector(state =>state.cocktail.drinks)
+
+const handleButton=()=>{
+  dispatch(getCocktailAsync(filter));
+}
+
+const onChangeHandler = (event) => {
+  setFilter(event.target.value);
+};
+
+useEffect(()=>{
+  console.log(drinks)
+},[drinks])
+
+return (
+  <>
+    <div>
+      <input
+        type="text"
+        name="name"
+        value={filter}
+        onChange={onChangeHandler}
+      />
+      <button onClick={handleButton}>Submit</button>
     </div>
-  );
+    <div>
+      {
+        drinks && drinks.drinks.map((x,i)=> {
+          return <h3 key={i}>{x.strDrink}</h3>}
+          )
+      }
+    </div>
+  </>
+);
 }
 
 export default App;
