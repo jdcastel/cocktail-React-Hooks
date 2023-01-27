@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { cocktailApi } from "./api";
+import { cocktailApi } from "../../redux/api";
 
 export const getCocktailAsync = createAsyncThunk(
   "cocktail/fetchCocktail",
