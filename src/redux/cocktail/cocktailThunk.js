@@ -6,6 +6,6 @@ export const getCocktailAsync = createAsyncThunk(
   async (filter) => {
     const response = await cocktailApi(filter);
     console.log(response.data);
-    return response.data;
+    return response.data.drinks;
   }
 );

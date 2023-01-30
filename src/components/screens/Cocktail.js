@@ -2,8 +2,13 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { getCocktailAsync } from "../../redux/cocktail/cocktailThunk";
 import store from "../../store";
 import { useEffect, useState } from "react";
+import Tarjeta from "../controls/Tarjeta";
+import { Grid } from "@mui/material";
+
 
 function Cocktail() {
+
+  
   const [filter, setFilter] = useState("");
 
   const dispatch = useDispatch();
@@ -11,6 +16,9 @@ function Cocktail() {
 
   const handleButton = () => {
     dispatch(getCocktailAsync(filter));
+
+
+
   };
 
   const onChangeHandler = (event) => {
@@ -22,8 +30,8 @@ function Cocktail() {
   }, [drinks]);
 
   return (
-    <>
-      <div>
+    <Grid container>
+      <Grid item sm={12}>
         <input
           type="text"
           name="name"
@@ -31,14 +39,18 @@ function Cocktail() {
           onChange={onChangeHandler}
         />
         <button onClick={handleButton}>Submit</button>
-      </div>
-      <div>
+      </Grid>
+      <Grid item sm={12} sx={{ backgroundColor: "red" }}>
         {drinks &&
-          drinks.drinks.map((x, i) => {
-            return <h3 key={i}>{x.strDrink}</h3>;
-          })}
-      </div>
-    </>
+          drinks.map((x, i) => 
+            <Grid item sm={4} >
+              <div height={100}>hola</div>
+              {/* <Tarjeta key={i} cocktail={x} />; */}
+            </Grid>
+          )}
+      </Grid>
+
+    </Grid>
   );
 }
 

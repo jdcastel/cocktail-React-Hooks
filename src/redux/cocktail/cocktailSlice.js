@@ -12,8 +12,12 @@ export const cocktailSlice = createSlice({
   },
   extraReducers:(builder)=>{
     builder 
+    .addCase(getCocktailAsync.pending,(state)=>{
+      state.procesando = true;
+    })
     .addCase(getCocktailAsync.fulfilled,(state,action)=>{
       state.drinks = action.payload;
+      state.procesando = false;
     });
   }
 });
