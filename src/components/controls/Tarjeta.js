@@ -40,7 +40,7 @@ export default function Tarjeta({ cocktail }) {
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
+                
               </Avatar>
             }
             action={
